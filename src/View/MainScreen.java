@@ -4,62 +4,84 @@
  */
 package View;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
  * @author multi
  */
-public class MainScreen {
- private JFrame window;
- private int windowsWidth=700;
- private int windowsHeight=600;
- 
- public MainScreen(){
-CreateWindow();
- }
- public MainScreen(String str){
- };
+public class MainScreen implements ActionListener {
+
+    private static JFrame window;
+    private int windowsWidth = 700;
+    private int windowsHeight = 600;
+    private static int score = 0;
+    private JPanel pPrincipal;
+    private JPanel pComponentes;
+    private boolean on = false;
+    Status status;
+
+    public MainScreen() {
+        CreateWindow();
+    }
+
+    public MainScreen(String str) {
+    }
+
+    ;
  
  // Will create the main screen of the play
-private void CreateWindow(){
-window = new JFrame();
-window.setSize(windowsWidth,windowsHeight);
-window.setTitle("Brick Breaker Game");
-window.setLocationRelativeTo(null);
-ImageIcon image= new ImageIcon("src/Imagens/BrickerGame.png");
-window.setIconImage(image.getImage());
-window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-window.setResizable(false);
+private void CreateWindow() {
+        window = new JFrame();
+        window.setSize(windowsWidth, windowsHeight);
+        window.setTitle("Brick Breaker Game");
+        window.setLocationRelativeTo(null);
+        ImageIcon image = new ImageIcon("src/Imagens/BrickerGame.png");
+        window.setIconImage(image.getImage());
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
 
-addGamePlay();
+        addGamePlay();
+        window.setVisible(true);
+    }
 
-window.setVisible(true);
-
-
-}
- 
-private void addGamePlay(){
- GamePlay gameplay = new GamePlay();
- window.add(gameplay);
- }
+    private void addGamePlay() {
+        GamePlay gameplay = new GamePlay();
+        window.add(gameplay);
+    }
 
     public int getWindowsWidth() {
         return windowsWidth;
     }
 
-    
-
     public int getWindowsHeight() {
         return windowsHeight;
     }
 
- 
- 
- 
- 
+    public void setScore(int Score) {
+        this.score = Score;
+    }
+
     public static void main(String[] args) {
         new MainScreen();
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
 }
