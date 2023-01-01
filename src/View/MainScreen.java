@@ -32,7 +32,6 @@ public class MainScreen implements ActionListener {
     private JPanel pPrincipal;
     private JPanel pComponentes;
     private boolean on = false;
-    Status status;
 
     public MainScreen() {
         CreateWindow();
@@ -42,9 +41,9 @@ public class MainScreen implements ActionListener {
     }
 
     ;
- 
- // Will create the main screen of the play
-private void CreateWindow() {
+
+    // Will create the main screen of the play
+    private void CreateWindow() {
         window = new JFrame();
         window.setSize(windowsWidth, windowsHeight);
         window.setTitle("Brick Breaker Game");

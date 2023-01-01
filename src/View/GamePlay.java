@@ -49,7 +49,7 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
         paddle = new Paddle();
         ball = new Ball();
         map = new MapGenerator(3, 7);
-        gameSound= new Sound();
+        
     }
 
     public GamePlay(String str) {
