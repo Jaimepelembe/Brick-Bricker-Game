@@ -26,8 +26,8 @@ import javax.swing.JPanel;
 public class MainScreen implements ActionListener {
 
     private static JFrame window;
-    private int windowsWidth = 700;
-    private int windowsHeight = 600;
+    private int windowsWidth = 800;
+    private int windowsHeight = 700;
     private static int score = 0;
     private JPanel pPrincipal;
     private JPanel pComponentes;

@@ -38,7 +38,7 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
     private Paddle paddle;
     private Ball ball;
     private Color background = Color.black;
-    private Music music;
+
 
     public GamePlay() {
         addKeyListener(this);
@@ -49,7 +49,7 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
         paddle = new Paddle();
         ball = new Ball();
         map = new MapGenerator(3, 7);
-        music= new Music();
+        gameSound= new Sound();
     }
 
     public GamePlay(String str) {
@@ -87,7 +87,7 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
         //You won
         if(verifyEndLevel()){
         YouWon(g);}
-     
+
     }
 
     public void Level2() {
@@ -212,7 +212,6 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
 
         if (paddle.isPlay()) {
             ball.moveBall(paddle);
-       
         }
         repaint();
     }
