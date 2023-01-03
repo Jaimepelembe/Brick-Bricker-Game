@@ -1,4 +1,4 @@
-# BrickerGame
+# Brick Breaker Game
 Esta é a minha versão do Jogo clássico __Brick Breacker Game__.
 
 O jogo possui 4 nives onde em cada nivel o número dos tijolos e a velocidade da bola aumentam.
