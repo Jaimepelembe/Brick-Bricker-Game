@@ -28,8 +28,8 @@ import javax.swing.Timer;
 public class GamePlay extends JPanel implements ActionListener, KeyListener {
 
     private boolean play = false;
-    //private boolean nextLevel = false;
-    private int level=2;
+    // private boolean nextLevel = false;
+    private int level = 2;
     private Timer timer;
     private int delay = 1;
     private int width = new MainScreen("").getWindowsWidth();
@@ -38,7 +38,6 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
     private Paddle paddle;
     private Ball ball;
     private Color background = Color.black;
-
 
     public GamePlay() {
         addKeyListener(this);
@@ -49,7 +48,7 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
         paddle = new Paddle();
         ball = new Ball();
         map = new MapGenerator(3, 7);
-        
+
     }
 
     public GamePlay(String str) {
@@ -57,36 +56,37 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
     }
 
     public void paint(Graphics g) {
-        //Black canvas
+        // Black canvas
         g.setColor(background);
         g.fillRect(1, 1, (width - 8), (height - 8)); // (1,1,692,592)
 
-        //Border
+        // Border
         g.setColor(Color.yellow);
-        g.fillRect(0, 0, (width - 8), 3);//UP
-        g.fillRect(0, 3, 3, (height - 8));//Left
-        g.fillRect((width - 19), 3, 3, (height - 8));//Rigth
+        g.fillRect(0, 0, (width - 8), 3);// UP
+        g.fillRect(0, 3, 3, (height - 8));// Left
+        g.fillRect((width - 19), 3, 3, (height - 8));// Rigth
 
-        //paddle
+        // paddle
         paddle.draw(g);
 
-        //Bricks
+        // Bricks
         map.draw((Graphics2D) g);
 
-        //Ball
+        // Ball
         ball.draw(g);
         ball.setMap(map);
 
         ScoreAndLevel(g);
 
-        //Game Over
+        // Game Over
         if (ball.getBallposY() >= height) {
             gameOver(g);
         }
 
-        //You won
-        if(verifyEndLevel()){
-        YouWon(g);}
+        // You won
+        if (verifyEndLevel()) {
+            YouWon(g);
+        }
 
     }
 
@@ -100,7 +100,7 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
         paddle.setPlayerX(width / 2);
         paddle.setSpeedPuddle((int) (width * 0.030));
     }
-      
+
     public void Level3() {
         ball.setBallposX(width / 2);
         ball.setBallposY(height / 2);
@@ -111,18 +111,18 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
         paddle.setPlayerX(width / 2);
         paddle.setSpeedPuddle((int) (width * 0.038));
     }
-    
-    public void Level4(){
-    ball.setBallXdir(width/2);
-    ball.setBallYdir(height/2);
-    ball.setBallXdir(-6);
-    ball.setBallYdir(-6);
-    map =new MapGenerator(6,10);
-    map.setMapColor(Color.YELLOW);
-    paddle.setPlayerX(width/2);
-    paddle.setSpeedPuddle((int) (width * 0.048));
+
+    public void Level4() {
+        ball.setBallXdir(width / 2);
+        ball.setBallYdir(height / 2);
+        ball.setBallXdir(-6);
+        ball.setBallYdir(-6);
+        map = new MapGenerator(6, 10);
+        map.setMapColor(Color.YELLOW);
+        paddle.setPlayerX(width / 2);
+        paddle.setSpeedPuddle((int) (width * 0.048));
     }
-    
+
     public void RestartGame() {
         ball.setBallposX(width / 2);
         ball.setBallposY(height / 2);
@@ -157,37 +157,38 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
 
     }
 
-    public boolean verifyEndLevel(){
-    if(map.getTotalBricks()<=0){
-    return true;
+    public boolean verifyEndLevel() {
+        if (map.getTotalBricks() <= 0) {
+            return true;
+        }
+        return false;
     }
-    return false;
-}
-    
+
     public void YouWon(Graphics g) {
-            paddle.setPlay(false);
-            paddle.setPlayerX(0);
-            ball.setBallXdir(0);
-            ball.setBallYdir(0);
-            //nextLevel = true;
+        paddle.setPlay(false);
+        paddle.setPlayerX(0);
+        ball.setBallXdir(0);
+        ball.setBallYdir(0);
+        // nextLevel = true;
 
-            g.setColor(Color.blue);
-            g.setFont(new Font("arial", Font.BOLD, 50));
-            int x = (width / 2) - 250;
-            int y1 = (height / 2) - 100;
-            int y2 = (height / 2) - 40;
-            int y3 = (height / 2) + 15;
-            
-            g.drawString("You Win!", x + 70, y1);
+        g.setColor(Color.blue);
+        g.setFont(new Font("arial", Font.BOLD, 50));
+        int x = (width / 2) - 250;
+        int y1 = (height / 2) - 100;
+        int y2 = (height / 2) - 40;
+        int y3 = (height / 2) + 15;
 
-            g.setColor(Color.WHITE);
-            g.setFont(new Font("arial", Font.BOLD, 50));
-            g.drawString("Your Score: " + ball.getScore(), x + 20, y2);
-            
-            if(level<4){
+        g.drawString("You Win!", x + 70, y1);
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("arial", Font.BOLD, 50));
+        g.drawString("Your Score: " + ball.getScore(), x + 20, y2);
+
+        if (level < 4) {
             g.setColor(Color.YELLOW);
             g.setFont(new Font("arial", Font.BOLD, 30));
-            g.drawString("Press ENTER to GO Level "+level, x+20 , y3);}
+            g.drawString("Press ENTER to GO Level " + level, x + 20, y3);
+        }
     }
 
     public void ScoreAndLevel(Graphics g) {
@@ -195,10 +196,10 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
             g.setColor(Color.WHITE);
             g.setFont(new Font("calibre", Font.BOLD, 25));
             g.drawString("Score: " + ball.getScore(), width / 2, 22);
-            
+
             g.setColor(Color.LIGHT_GRAY);
             g.setFont(new Font("calibre", Font.BOLD, 22));
-            g.drawString("Level: " + (level-1), 250, 22);
+            g.drawString("Level: " + (level - 1), 250, 22);
         }
 
     }
@@ -222,32 +223,32 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //Movements of the puddle
+        // Movements of the puddle
         paddle.keyPressed(e);
 
-        //Restar the game
+        // Restar the game
         if (e.getKeyCode() == KeyEvent.VK_SPACE && !paddle.isPlay() && !verifyEndLevel()) {
             RestartGame();
-            level=2;
+            level = 2;
             ball.setScore(0);
         }
 
-        //Go to next Level
-        //Level 2
-        if (e.getKeyCode() == KeyEvent.VK_ENTER && verifyEndLevel() && level==2) {
-            level=3;
+        // Go to next Level
+        // Level 2
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && verifyEndLevel() && level == 2) {
+            level = 3;
             Level2();
-            
+
         }
-        
-        //Level 3
-        if(e.getKeyCode()==KeyEvent.VK_ENTER && verifyEndLevel() && level==3){
-        level=4;
-        Level3();
+
+        // Level 3
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && verifyEndLevel() && level == 3) {
+            level = 4;
+            Level3();
         }
-        
-        if(e.getKeyCode()== KeyEvent.VK_ENTER && verifyEndLevel() && level==4){
-        Level4();
+
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && verifyEndLevel() && level == 4) {
+            Level4();
         }
         repaint();
     }

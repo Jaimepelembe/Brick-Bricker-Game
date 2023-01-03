@@ -22,12 +22,12 @@ public class Ball implements ActionListener {
     private int ballSize;
     private int ballposX = (width / 2);
     private int ballposY = (height / 2);
-    private int ballXdir = -3;
+    private int ballXdir = -2;
     private int ballYdir = -3;
     private Color ballColor = Color.RED;
     private Paddle paddle;
     private MapGenerator map;
-    private int score=0;
+    private int score = 0;
 
     public Ball() {
         paddle = new Paddle();
@@ -35,18 +35,18 @@ public class Ball implements ActionListener {
     }
 
     public void draw(Graphics g) {
-        //Ball
+        // Ball
         g.setColor(ballColor);
         g.fillOval(ballposX, ballposY, ballSize, ballSize);
     }
 
-    //Move the Ball
+    // Move the Ball
     public void moveBall(Paddle paddle) {
         if (ballposX <= 0 || ballposX >= (width - ballSize - 8)) {
             ballXdir = -(ballXdir);
         }
 
-        //Verify the colison of the ball with the paddle
+        // Verify the colison of the ball with the paddle
         Rectangle ballRect = new Rectangle(ballposX, ballposY, ballSize, ballSize);
         Rectangle paddleRect = new Rectangle(paddle.getPlayerX(), (height - 80), paddle.getPaddlewidth(), 15);
 
@@ -54,14 +54,14 @@ public class Ball implements ActionListener {
             ballYdir = -(ballYdir);
         }
 
-        //Brick Breaking by ball
+        // Brick Breaking by ball
         brickBreaking(ballRect);
-      
+
         ballposX += ballXdir;
         ballposY += ballYdir;
     }
 
-//Brick breaking by ball
+    // Brick breaking by ball
     public void brickBreaking(Rectangle ballRect) {
         for (int i = 0; i < map.map.length; i++) {
 
@@ -77,7 +77,7 @@ public class Ball implements ActionListener {
                     if (ballRect.intersects(brickRect)) {
                         map.setBrick(0, i, j);
                         map.setTotalBricks(map.getTotalBricks() - 1);
-                        score+=5;
+                        score += 5;
                         changeDirectionBall(brickposX, brickWidth);
                     }
 
@@ -93,7 +93,7 @@ public class Ball implements ActionListener {
      * Muda a direçâo da bola ao atingir um tijolo
      *
      * @param brickposX Posiçâo X da bola
-     * @param width Comprimento do tijolo
+     * @param width     Comprimento do tijolo
      */
     public void changeDirectionBall(int brickposX, int width) {
         if (ballposX + ballSize <= brickposX || ballposX + 1 >= brickposX + width) {
@@ -103,8 +103,6 @@ public class Ball implements ActionListener {
         }
     }
 
-   
-    
     public void setMap(MapGenerator map) {
         this.map = map;
     }
@@ -124,7 +122,6 @@ public class Ball implements ActionListener {
     public void setBallposY(int ballposY) {
         this.ballposY = ballposY;
     }
-    
 
     public int getBallposX() {
         return ballposX;
@@ -149,8 +146,7 @@ public class Ball implements ActionListener {
     public void setBallYdir(int ballYdir) {
         this.ballYdir = ballYdir;
     }
- 
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
     }
