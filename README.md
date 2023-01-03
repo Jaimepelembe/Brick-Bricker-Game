@@ -14,3 +14,7 @@ Foto 1: **Jogo Pausado.**
 ![Brick breaker playing](https://user-images.githubusercontent.com/105989003/210344108-53216122-05d8-47df-8d3a-dbeda99341b6.jpg)
 
 Foto 2: **Jogo em Movimento**
+
+![Game Over](https://user-images.githubusercontent.com/105989003/210350373-81cd2a4d-52c9-4aa2-bc48-8c430e26c24c.jpg)
+
+Foto 3: **Game Over**
