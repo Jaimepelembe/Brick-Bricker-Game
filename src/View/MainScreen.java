@@ -14,6 +14,9 @@ import java.awt.Insets;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,7 +36,7 @@ public class MainScreen implements ActionListener {
     private JPanel pComponentes;
     private boolean on = false;
 
-    public MainScreen() {
+    public MainScreen() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         CreateWindow();
     }
 
@@ -43,7 +46,7 @@ public class MainScreen implements ActionListener {
     ;
 
     // Will create the main screen of the play
-    private void CreateWindow() {
+    private void CreateWindow() throws LineUnavailableException, IOException, UnsupportedAudioFileException{
         window = new JFrame();
         window.setSize(windowsWidth, windowsHeight);
         window.setTitle("Brick Breaker Game");
@@ -57,7 +60,7 @@ public class MainScreen implements ActionListener {
         window.setVisible(true);
     }
 
-    private void addGamePlay() {
+    private void addGamePlay()throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         GamePlay gameplay = new GamePlay();
         window.add(gameplay);
     }
@@ -74,7 +77,7 @@ public class MainScreen implements ActionListener {
         this.score = Score;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         new MainScreen();
     }
 

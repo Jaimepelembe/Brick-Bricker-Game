@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.Sound;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -28,7 +29,6 @@ import javax.swing.Timer;
 public class GamePlay extends JPanel implements ActionListener, KeyListener {
 
     private boolean play = false;
-    // private boolean nextLevel = false;
     private int level = 2;
     private Timer timer;
     private int delay = 1;
@@ -38,8 +38,18 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
     private Paddle paddle;
     private Ball ball;
     private Color background = Color.black;
+    private Sound backgrounSound;
 
-    public GamePlay() {
+    public GamePlay() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+        intComponents();
+
+    }
+
+    public GamePlay(String str) {
+
+    }
+
+    private void intComponents() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(true);
@@ -49,9 +59,10 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
         ball = new Ball();
         map = new MapGenerator(3, 7);
 
-    }
-
-    public GamePlay(String str) {
+        backgrounSound = new Sound();
+        backgrounSound.setFile(0);
+        backgrounSound.backGraundSound();
+        backgrounSound.start();
 
     }
 
@@ -212,7 +223,15 @@ public class GamePlay extends JPanel implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
 
         if (paddle.isPlay()) {
-            ball.moveBall(paddle);
+            try {
+                ball.moveBall(paddle);
+            } catch (LineUnavailableException ex) {
+                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         repaint();
     }

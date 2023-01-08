@@ -4,12 +4,16 @@
  */
 package View;
 
+import Controller.Sound;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -28,12 +32,19 @@ public class Ball implements ActionListener {
     private Paddle paddle;
     private MapGenerator map;
     private int score = 0;
+    private Sound effectSound;
 
-    public Ball() {
-        paddle = new Paddle();
-        ballSize = (int) (paddle.getPaddlewidth() * 0.2);
+    public Ball()throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+        initComponents();
     }
 
+    private void initComponents() throws LineUnavailableException, IOException, UnsupportedAudioFileException{
+   
+    
+    paddle = new Paddle();
+    ballSize = (int) (paddle.getPaddlewidth() * 0.2);
+    
+    }
     public void draw(Graphics g) {
         // Ball
         g.setColor(ballColor);
@@ -41,7 +52,7 @@ public class Ball implements ActionListener {
     }
 
     // Move the Ball
-    public void moveBall(Paddle paddle) {
+    public void moveBall(Paddle paddle) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         if (ballposX <= 0 || ballposX >= (width - ballSize - 8)) {
             ballXdir = -(ballXdir);
         }
@@ -62,7 +73,7 @@ public class Ball implements ActionListener {
     }
 
     // Brick breaking by ball
-    public void brickBreaking(Rectangle ballRect) {
+    public void brickBreaking(Rectangle ballRect) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         for (int i = 0; i < map.map.length; i++) {
 
             for (int j = 0; j < map.map[0].length; j++) {
@@ -95,12 +106,18 @@ public class Ball implements ActionListener {
      * @param brickposX Posiçâo X da bola
      * @param width     Comprimento do tijolo
      */
-    public void changeDirectionBall(int brickposX, int width) {
+    public void changeDirectionBall(int brickposX, int width) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+        
         if (ballposX + ballSize <= brickposX || ballposX + 1 >= brickposX + width) {
             ballXdir = -(ballXdir);
         } else {
             ballYdir = -(ballYdir);
         }
+//        //Sound Effect of Collision
+//        effectSound= new Sound();
+//        effectSound.setFile(1);
+//        effectSound.effectSound();
+//        
     }
 
     public void setMap(MapGenerator map) {
