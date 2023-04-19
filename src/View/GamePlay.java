@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
  
- /*hi people meu nome é Jaime. */
+ /*hi people meu nome é Jaime.*/
+ /*Eu sou o cara*/
 package View;
 
 import Controller.Sound;
